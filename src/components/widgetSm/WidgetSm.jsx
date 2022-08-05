@@ -9,12 +9,16 @@ export default function WidgetSm() {
   useEffect(() => {
     const getNewUsers = async () => {
       try {
-        const res = await axios.get("/users?new=true", {
-          headers: {
-            token:
-              "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
+        const res = await axios.get(
+          "https://moviehub-api.herokuapp.com/api/users?new=true",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          }
+        );
         setNewUsers(res.data);
       } catch (err) {
         console.log(err);
@@ -22,7 +26,7 @@ export default function WidgetSm() {
     };
     getNewUsers();
   }, []);
-  
+
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Users</span>

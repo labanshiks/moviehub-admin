@@ -8,12 +8,16 @@ export default function WidgetLg() {
   useEffect(() => {
     const getNewMovies = async () => {
       try {
-        const res = await axios.get("/movies?new=true", {
-          headers: {
-            token:
-              "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
+        const res = await axios.get(
+          "https://moviehub-api.herokuapp.com/api/movies?new=true",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          }
+        );
         setNewMovies(res.data);
       } catch (err) {
         console.log(err);
@@ -36,19 +40,17 @@ export default function WidgetLg() {
             <th className="widgetLgTh">Status</th>
           </tr>
           {newMovies.map((movie) => (
-          <tr className="widgetLgTr">
-            <td className="widgetLgUser">
-              <img
-               src={movie.img} alt="" className="widgetLgImg"
-              />
-              <span className="widgetLgName">{movie.title}</span>
-            </td>
-            <td className="widgetLgDate">2 Jun 2021</td>
-            <td className="widgetLgStatus">
-              <Button type="Approved" />
-              {movie.isSeries}
-            </td>
-          </tr>
+            <tr className="widgetLgTr">
+              <td className="widgetLgUser">
+                <img src={movie.img} alt="" className="widgetLgImg" />
+                <span className="widgetLgName">{movie.title}</span>
+              </td>
+              <td className="widgetLgDate">2 Jun 2021</td>
+              <td className="widgetLgStatus">
+                <Button type="Approved" />
+                {movie.isSeries}
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
